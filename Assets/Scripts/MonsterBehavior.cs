@@ -141,7 +141,7 @@ public class MonsterBehavior : MonoBehaviour
                 destinationList.Add(hit.transform.position);
             }
         }
-        Debug.Log(destinationList.Count);
+        //Debug.Log(destinationList.Count);
         var rand = Random.Range(0, destinationList.Count);
         agent.SetDestination(destinationList[rand]);
     }
