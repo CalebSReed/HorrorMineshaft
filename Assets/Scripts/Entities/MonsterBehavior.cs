@@ -145,4 +145,14 @@ public class MonsterBehavior : MonoBehaviour
         var rand = Random.Range(0, destinationList.Count);
         agent.SetDestination(destinationList[rand]);
     }
+
+    public void SetAgentDestination(Vector3 pos)
+    {
+        Debug.Log("begin listening");
+        if (!playerIsSeen)
+        {
+            agent.destination = pos;
+            Debug.Log("goingg now");
+        }
+    }
 }

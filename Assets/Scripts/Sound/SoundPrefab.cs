@@ -14,6 +14,7 @@ public class SoundPrefab : MonoBehaviour
     public float goal;
     public bool follow;
     public GameObject source;
+    public float noiseRadius;
     private Coroutine countdown;
 
     public void StartTimer()
@@ -23,6 +24,16 @@ public class SoundPrefab : MonoBehaviour
             progress = 0;
             goal = clip.length;
             countdown = StartCoroutine(DisableOnSoundEnd());
+
+            var allListeners = Physics.OverlapSphere(transform.position, noiseRadius);
+
+            foreach (var listener in allListeners)
+            {
+                if (listener.attachedRigidbody && listener.attachedRigidbody.GetComponent<HearingManager>() != null)
+                {
+                    listener.attachedRigidbody.GetComponent<HearingManager>().HearSound(transform.position);
+                }
+            }
         }
     }
 

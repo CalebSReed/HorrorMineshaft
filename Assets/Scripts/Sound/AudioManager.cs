@@ -93,6 +93,7 @@ public class AudioManager : MonoBehaviour//we need multiple instances of this. s
         spf.follow = followSource;
         spf.source = objSource;
         spf.volMult = s.volumeMult;
+        spf.noiseRadius = s.soundReachRadius;
         spf.StartTimer();
 
         audioSource.gameObject.transform.position = position;

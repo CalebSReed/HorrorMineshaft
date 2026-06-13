@@ -34,7 +34,10 @@ public class CameraHeadBob : MonoBehaviour
             if (stepTimer >= Mathf.PI)
             {
                 var rand = Random.Range(1, 6);
-                AudioManager.Instance.Play($"PlayerStep{rand}", transform.position, PlayerInput.Instance.gameObject, true);
+                if (PlayerInput.Instance.movementState != PlayerInput.MovementState.Crouching && PlayerInput.Instance.movementState != PlayerInput.MovementState.CrouchingDrained)
+                {
+                    AudioManager.Instance.Play($"PlayerStep{rand}", transform.position, PlayerInput.Instance.gameObject, true);
+                }
                 stepTimer -= Mathf.PI;
             }
         }

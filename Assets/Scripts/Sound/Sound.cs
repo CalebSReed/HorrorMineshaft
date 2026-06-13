@@ -29,6 +29,8 @@ public class Sound
 
     public float volumeMult = 1f;
 
+    public float soundReachRadius;
+
     [Range(.1f, 3f)]
     private float pitch;
 
