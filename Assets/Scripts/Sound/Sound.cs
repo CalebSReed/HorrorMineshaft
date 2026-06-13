@@ -31,6 +31,8 @@ public class Sound
 
     public float soundReachRadius;
 
+    public float alertValue;
+
     [Range(.1f, 3f)]
     private float pitch;
 

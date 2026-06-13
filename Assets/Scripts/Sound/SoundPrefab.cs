@@ -15,6 +15,7 @@ public class SoundPrefab : MonoBehaviour
     public bool follow;
     public GameObject source;
     public float noiseRadius;
+    public float noiseVal;
     private Coroutine countdown;
 
     public void StartTimer()
@@ -31,7 +32,8 @@ public class SoundPrefab : MonoBehaviour
             {
                 if (listener.attachedRigidbody && listener.attachedRigidbody.GetComponent<HearingManager>() != null)
                 {
-                    listener.attachedRigidbody.GetComponent<HearingManager>().HearSound(transform.position);
+                    listener.attachedRigidbody.GetComponent<HearingManager>().HearSound(transform.position, noiseVal);
+                    return;
                 }
             }
         }
