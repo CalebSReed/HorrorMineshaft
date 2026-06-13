@@ -15,9 +15,12 @@ public class PlayerInput : MonoBehaviour
     {
         Walking,
         Sprinting,
-        Crouching
+        Crouching,
+        Drained,
+        CrouchingDrained
     }
 
+    private MovementState previousMovementState;
     public MovementState movementState { get; private set; }
 
     public float moveSpeed;
@@ -74,6 +77,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private float fovAdjustSpeed;
     private StaminaManager staminaManager;
 
+    public CameraHeadBob headBob;
+
     private void Awake()
     {
         Instance = this;
@@ -129,6 +134,50 @@ public class PlayerInput : MonoBehaviour
         MovePlayer();
     }
 
+    public void ChangeMovementState(MovementState state)
+    {
+        if (movementState == state) return;
+
+        previousMovementState = movementState;
+        movementState = state;
+
+        if (previousMovementState == MovementState.Sprinting)
+        {
+            cameraHeightGoal = normalCameraHeight;
+            goalFOV = normalFOV;
+            headBob.speedMult = 1;
+        }
+        else if (previousMovementState == MovementState.Drained && movementState == MovementState.Crouching)
+        {
+            movementState = MovementState.CrouchingDrained;
+        }
+        else if (previousMovementState == MovementState.CrouchingDrained && movementState == MovementState.Walking)
+        {
+            movementState = MovementState.Drained;
+        }
+
+        if (movementState == MovementState.Sprinting)
+        {
+            cameraHeightGoal = normalCameraHeight;
+            goalFOV = sprintingFOV;
+            headBob.speedMult = 2;
+        }
+        else if (movementState == MovementState.Crouching)
+        {
+            cameraHeightGoal = crouchCameraHeight;
+            headBob.speedMult = .5f;
+        }
+        else if (movementState == MovementState.Drained)
+        {
+            headBob.speedMult = .5f;
+        }
+        else if (movementState == MovementState.Walking)
+        {
+            cameraHeightGoal = normalCameraHeight;
+            headBob.speedMult = 1f;
+        }
+    }
+
     private void GetMovementInput()
     {
         horizontalInput = playerInput.PlayerDefault.Movement.ReadValue<Vector2>().x;
@@ -140,11 +189,11 @@ public class PlayerInput : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         moveDirection.y = 0;
 
-        if (movementState == MovementState.Walking)
+        if (movementState == MovementState.Walking || movementState == MovementState.Drained)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Force);
         }
-        else if (movementState == MovementState.Crouching)
+        else if (movementState == MovementState.Crouching || movementState == MovementState.CrouchingDrained)
         {
             rb.AddForce(moveDirection.normalized * crouchSpeed, ForceMode.Force);
         }
@@ -166,16 +215,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed && movementState != MovementState.Crouching && verticalInput > 0 && !staminaManager.staminaCooldown)
         {
-            cameraHeightGoal = normalCameraHeight;
-            movementState = MovementState.Sprinting;
-            goalFOV = sprintingFOV;
+            ChangeMovementState(MovementState.Sprinting);
+
         }
         //else if (context. && movementState != MovementState.Crouching && moveDirection.z > 0)
         else if (context.canceled && movementState != MovementState.Walking)
         {
-            cameraHeightGoal = normalCameraHeight;
-            movementState = MovementState.Walking;
-            goalFOV = normalFOV;
+            ChangeMovementState(MovementState.Walking);
         }
     }
 
@@ -183,9 +229,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (movementState != MovementState.Crouching && movementState != MovementState.Sprinting && verticalInput > 0 && playerInput.PlayerDefault.Sprint.ReadValue<float>() > 0 && !staminaManager.staminaPenalty && !staminaManager.staminaCooldown)
         {
-            cameraHeightGoal = normalCameraHeight;
-            movementState = MovementState.Sprinting;
-            goalFOV = sprintingFOV;
+            ChangeMovementState(MovementState.Sprinting);
         }
     }
 
@@ -193,9 +237,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (movementState == MovementState.Sprinting && verticalInput <= 0)
         {
-            cameraHeightGoal = normalCameraHeight;
-            movementState = MovementState.Walking;
-            goalFOV = normalFOV;
+            ChangeMovementState(MovementState.Walking);
         }
     }
 
@@ -203,13 +245,11 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed && movementState != MovementState.Sprinting)
         {
-            cameraHeightGoal = crouchCameraHeight;
-            movementState = MovementState.Crouching;
+            ChangeMovementState(MovementState.Crouching);
         }
-        else if (context.canceled && movementState == MovementState.Crouching)
+        else if (context.canceled && movementState == MovementState.Crouching || context.canceled && movementState == MovementState.CrouchingDrained)
         {
-            cameraHeightGoal = normalCameraHeight;
-            movementState = MovementState.Walking;
+            ChangeMovementState(MovementState.Walking);
         }
     }
 

@@ -41,10 +41,10 @@ public class StaminaManager : MonoBehaviour
 
             if (currentStamina <= 0)
             {
-                PlayerInput.Instance.RequestChangeMovementState(PlayerInput.MovementState.Walking);
                 staminaCooldown = true;
                 staminaPenalty = true;
-                PlayerInput.Instance.goalFOV = PlayerInput.Instance.drainedStaminaFOV;
+                PlayerInput.Instance.ChangeMovementState(PlayerInput.MovementState.Drained);
+                PlayerInput.Instance.goalFOV = PlayerInput.Instance.drainedStaminaFOV; 
                 currentStamina = 0;
             }
         }
@@ -74,6 +74,15 @@ public class StaminaManager : MonoBehaviour
                 staminaCooldownTimer = 0;
                 PlayerInput.Instance.goalFOV = PlayerInput.Instance.normalFOV;
                 staminaCooldown = false;
+
+                if (PlayerInput.Instance.movementState == PlayerInput.MovementState.Drained)
+                {
+                    PlayerInput.Instance.ChangeMovementState(PlayerInput.MovementState.Walking);
+                }
+                else if (PlayerInput.Instance.movementState == PlayerInput.MovementState.CrouchingDrained)
+                {
+                    PlayerInput.Instance.ChangeMovementState(PlayerInput.MovementState.Crouching);
+                }
             }
         }
     }

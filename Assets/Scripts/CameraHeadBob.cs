@@ -8,9 +8,11 @@ public class CameraHeadBob : MonoBehaviour
     public float bobIntensityX;
     public float bobSpeed;
     public float easingCoefficient;
+    public float speedMult;
 
     private Vector3 OriginalOffset;
     private float SinTime;
+    private float stepTimer;
     private Vector3 lastPlayerPosition;
     private bool playerIsMoving;
 
@@ -26,11 +28,20 @@ public class CameraHeadBob : MonoBehaviour
         Vector2 inputVector = new Vector3(PlayerInput.Instance.playerInput.PlayerDefault.Movement.ReadValue<Vector2>().x, PlayerInput.Instance.playerInput.PlayerDefault.Movement.ReadValue<Vector2>().y);
         if (inputVector.magnitude > 0f)
         {
-            SinTime += Time.deltaTime * bobSpeed;
+            SinTime += Time.deltaTime * bobSpeed * speedMult;
+            stepTimer += Time.deltaTime * bobSpeed * speedMult;
+
+            if (stepTimer >= Mathf.PI)
+            {
+                var rand = Random.Range(1, 6);
+                AudioManager.Instance.Play($"PlayerStep{rand}", transform.position, PlayerInput.Instance.gameObject, true);
+                stepTimer -= Mathf.PI;
+            }
         }
         else
         {
             SinTime = 0f;
+            stepTimer = 0f;
             transform.localPosition = Vector3.Slerp(transform.localPosition, Vector3.zero, Time.deltaTime * easingCoefficient);
             return;
         }

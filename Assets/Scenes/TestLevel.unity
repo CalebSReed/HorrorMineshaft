@@ -1713,6 +1713,7 @@ MonoBehaviour:
   bobIntensityX: 1
   bobSpeed: 6
   easingCoefficient: 4
+  speedMult: 1
 --- !u!1001 &338268984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4232,31 +4233,67 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2e2928d481f7f1742a728be363cec0bd, type: 3}
     soundType: 0
     volumeMult: 1
+    soundReachRadius: 50
     loop: 0
   - name: BirdWarning2
     clip: {fileID: 8300000, guid: fa48cf7096e273e419376a05ae640ad7, type: 3}
     soundType: 0
     volumeMult: 1
+    soundReachRadius: 50
     loop: 0
   - name: BirdWarning3
     clip: {fileID: 8300000, guid: ce9026071d0aaf54ca1cb0f599ba0ace, type: 3}
     soundType: 0
     volumeMult: 1
+    soundReachRadius: 50
     loop: 0
   - name: BirdDying1
     clip: {fileID: 8300000, guid: 3ce623d2861a9cc48a0401dc7a6b379d, type: 3}
     soundType: 0
     volumeMult: 1
+    soundReachRadius: 100
     loop: 0
   - name: BirdDying2
     clip: {fileID: 8300000, guid: 716bd7e6e75465649b3cac0449788a55, type: 3}
     soundType: 0
     volumeMult: 1
+    soundReachRadius: 100
     loop: 0
   - name: BirdDying3
     clip: {fileID: 8300000, guid: 87b7d1b1bd5519546907bc24988990c3, type: 3}
     soundType: 0
     volumeMult: 1
+    soundReachRadius: 100
+    loop: 0
+  - name: PlayerStep1
+    clip: {fileID: 8300000, guid: 2c08e041660b1a646ab41c105d943422, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 100
+    loop: 0
+  - name: PlayerStep2
+    clip: {fileID: 8300000, guid: 72f77f1503d269a438544ec585212ef5, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 100
+    loop: 0
+  - name: PlayerStep3
+    clip: {fileID: 8300000, guid: 967430a5b8b660c41902b09959c54a53, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 100
+    loop: 0
+  - name: PlayerStep4
+    clip: {fileID: 8300000, guid: 1b5007d3e4ddccb4ab76bf1611573dcc, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 100
+    loop: 0
+  - name: PlayerStep5
+    clip: {fileID: 8300000, guid: 83745b1c8292d404da77570508d8b5b7, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 100
     loop: 0
 --- !u!4 &1102388210
 Transform:
@@ -34235,6 +34272,7 @@ MonoBehaviour:
   drainedStaminaFOV: 50
   goalFOV: 0
   fovAdjustSpeed: 10
+  headBob: {fileID: 330585549}
 --- !u!54 &1917527894
 Rigidbody:
   m_ObjectHideFlags: 0
