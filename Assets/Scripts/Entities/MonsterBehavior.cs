@@ -146,11 +146,12 @@ public class MonsterBehavior : MonoBehaviour
         agent.SetDestination(destinationList[rand]);
     }
 
-    public void SetAgentDestination(Vector3 pos)
+    public void SetAgentDestination(Vector3 pos)//todo add diff steps with diff radiuses when crouching and running etc
     {
         Debug.Log("begin listening");
         if (!playerIsSeen)
         {
+            reachedDestination = false;
             agent.destination = pos;
             Debug.Log("goingg now");
         }
