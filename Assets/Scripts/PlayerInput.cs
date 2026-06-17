@@ -79,6 +79,16 @@ public class PlayerInput : MonoBehaviour
 
     public CameraHeadBob headBob;
 
+    [SerializeField] private CapsuleCollider bodyCollider;
+    [SerializeField] private float standingBodyHeight;
+    [SerializeField] private float crouchingBodyHeight;
+    private Vector3 crouchingVectorPos = new Vector3(0, .5f, 0);
+
+    [SerializeField] private Transform uncrouchChecker;
+    private float unCrouchCheckRadius = .49f;
+    [SerializeField] private LayerMask levelLayer;
+    private bool tryingToUncrouch;
+
     private void Awake()
     {
         Instance = this;
@@ -128,6 +138,11 @@ public class PlayerInput : MonoBehaviour
         CheckToExitSprint();
         CheckToRemoveStaminaPenalty();
         MaintainCameraHeight();
+
+        if (tryingToUncrouch)
+        {
+            TryToUncrouch();
+        }
     }
     private void FixedUpdate()
     {
@@ -150,6 +165,8 @@ public class PlayerInput : MonoBehaviour
         else if (previousMovementState == MovementState.Drained && movementState == MovementState.Crouching)
         {
             movementState = MovementState.CrouchingDrained;
+            bodyCollider.height = crouchingBodyHeight;
+            bodyCollider.transform.localPosition = crouchingVectorPos;
         }
         else if (previousMovementState == MovementState.CrouchingDrained && movementState == MovementState.Walking)
         {
@@ -161,20 +178,28 @@ public class PlayerInput : MonoBehaviour
             cameraHeightGoal = normalCameraHeight;
             goalFOV = sprintingFOV;
             headBob.speedMult = 2;
+            bodyCollider.height = standingBodyHeight;
+            bodyCollider.transform.localPosition = Vector3.up;
         }
         else if (movementState == MovementState.Crouching)
         {
             cameraHeightGoal = crouchCameraHeight;
             headBob.speedMult = .5f;
+            bodyCollider.height = crouchingBodyHeight;
+            bodyCollider.transform.localPosition = crouchingVectorPos;
         }
         else if (movementState == MovementState.Drained)
         {
             headBob.speedMult = .5f;
+            bodyCollider.height = standingBodyHeight;
+            bodyCollider.transform.localPosition = Vector3.up;
         }
         else if (movementState == MovementState.Walking)
         {
             cameraHeightGoal = normalCameraHeight;
             headBob.speedMult = 1f;
+            bodyCollider.height = standingBodyHeight;
+            bodyCollider.transform.localPosition = Vector3.up;
         }
     }
 
@@ -248,6 +273,31 @@ public class PlayerInput : MonoBehaviour
             ChangeMovementState(MovementState.Crouching);
         }
         else if (context.canceled && movementState == MovementState.Crouching || context.canceled && movementState == MovementState.CrouchingDrained)
+        {
+            if (CheckIfCanUncrouch())
+            {
+                ChangeMovementState(MovementState.Walking);
+            }
+        }
+    }
+
+    private bool CheckIfCanUncrouch()
+    {
+        var hits = Physics.OverlapSphere(uncrouchChecker.position, unCrouchCheckRadius, levelLayer);
+
+        if (hits.Length > 0)
+        {
+            Debug.Log(hits[0]);
+            tryingToUncrouch = true;
+            return false;
+        }
+        tryingToUncrouch = false;
+        return true;
+    }
+
+    private void TryToUncrouch()
+    {
+        if (CheckIfCanUncrouch())
         {
             ChangeMovementState(MovementState.Walking);
         }
@@ -420,5 +470,10 @@ public class PlayerInput : MonoBehaviour
         {
             healthManager.TakeDamage(999);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(uncrouchChecker.position, unCrouchCheckRadius);
     }
 }

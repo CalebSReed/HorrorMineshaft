@@ -146,14 +146,14 @@ public class MonsterBehavior : MonoBehaviour
         agent.SetDestination(destinationList[rand]);
     }
 
-    public void SetAgentDestination(Vector3 pos)//todo add diff steps with diff radiuses when crouching and running etc
+    public void SetAgentDestination(Vector3 pos)//todo swap navmesh surfaces when monster enters crawling mode to crawl through tight spaces
     {
-        Debug.Log("begin listening");
+        //Debug.Log("begin listening");
         if (!playerIsSeen)
         {
             reachedDestination = false;
             agent.destination = pos;
-            Debug.Log("goingg now");
+            //Debug.Log("goingg now");
         }
     }
 }
