@@ -16,9 +16,15 @@ public class CarbonMonoxide : MonoBehaviour
     private Vector3 destination;
     [SerializeField] LayerMask gasNodeLayer;
 
+    private bool touchingPlayer;
+
+    private GasNode currentNode;
+
     private void Start()
     {
         currentTimerGoal = Random.Range(timerMin, timerMax);
+        CheckNearbyNodesForDestination();
+        isMoving = true;
     }
 
     private void Update()
@@ -29,6 +35,14 @@ public class CarbonMonoxide : MonoBehaviour
 
             if (currentTimer >= currentTimerGoal)
             {
+                if (touchingPlayer)
+                {
+                    Debug.Log("Player is inside, staying still for now");
+                    currentTimer = 0;
+                    currentTimerGoal = Random.Range(timerMin, timerMax);
+                    return;
+                }
+
                 CheckNearbyNodesForDestination();
                 isMoving = true;
             }
@@ -51,19 +65,47 @@ public class CarbonMonoxide : MonoBehaviour
     {
         var nearbyNodes = Physics.SphereCastAll(transform.position, nodeCheckRadius, Vector3.up, 500, gasNodeLayer);
 
-        int coinFlip = Random.Range(0, 2);
-
-        if (coinFlip == 0)//choose random
+        if (currentNode != null)
         {
-            Debug.Log("choosing random node");
-            var rand = Random.Range(0, nearbyNodes.Length-1);
-            destination = nearbyNodes[rand].transform.position;
+            currentNode.nodeTaken = false;
+            currentNode = null;
         }
-        else//choose closest to player
+
+        while (currentNode == null)
         {
-            Debug.Log("choosing node nearest to player");
-            var newList = CalebUtils.SortListByDistance(nearbyNodes.ToList(), PlayerInput.Instance.transform);
-            destination = newList[0].Item1.position;
+            int coinFlip = Random.Range(0, 2);
+            if (coinFlip == 0)//choose random
+            {
+                Debug.Log("choosing random node");
+                var rand = Random.Range(0, nearbyNodes.Length - 1);
+                destination = nearbyNodes[rand].transform.position;
+                currentNode = nearbyNodes[rand].transform.GetComponent<GasNode>();
+
+                if (!currentNode.nodeTaken)
+                {
+                    currentNode.nodeTaken = true;
+                }
+                else
+                {
+                    currentNode = null;
+                }
+            }
+            else//choose closest to player
+            {
+                Debug.Log("choosing node nearest to player");
+                var newList = CalebUtils.SortListByDistance(nearbyNodes.ToList(), PlayerInput.Instance.transform);
+                destination = newList[0].Item1.position;
+                currentNode = newList[0].Item1.transform.GetComponent<GasNode>();
+
+                if (!currentNode.nodeTaken)
+                {
+                    currentNode.nodeTaken = true;
+                }
+                else
+                {
+                    currentNode = null;
+                }
+            }
         }
         Debug.Log(destination);
 
@@ -74,6 +116,7 @@ public class CarbonMonoxide : MonoBehaviour
         var oxygenLevel = other.attachedRigidbody.GetComponent<OxygenLevel>();
         if (oxygenLevel)
         {
+            touchingPlayer = true;
             oxygenLevel.BeginLosingOxygen();
         }
     }
@@ -83,6 +126,7 @@ public class CarbonMonoxide : MonoBehaviour
         var oxygenLevel = other.attachedRigidbody.GetComponent<OxygenLevel>();
         if (oxygenLevel)
         {
+            touchingPlayer = false;
             oxygenLevel.EndLosingOxygen();
         }
     }

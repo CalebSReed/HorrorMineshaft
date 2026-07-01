@@ -439,12 +439,6 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    public void RequestChangeMovementState(MovementState state)
-    {
-        //if check if we need to ignore this call sometimes
-        movementState = state;
-    }
-
     private void CheckToRemoveStaminaPenalty()
     {
         if (staminaManager.staminaPenalty)
