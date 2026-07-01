@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerMin: 30
   timerMax: 60
-  moveSpeed: 5
+  moveSpeed: 2
   nodeCheckRadius: 200
   gasNodeLayer:
     serializedVersion: 2

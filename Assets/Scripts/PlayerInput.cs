@@ -89,6 +89,11 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private LayerMask levelLayer;
     private bool tryingToUncrouch;
 
+    public bool carryingCoal { get; private set; }
+    public bool isMining { get; private set; }
+    [SerializeField] private GameObject mineAnim;
+    [SerializeField] private GameObject coalHand;
+
     private void Awake()
     {
         Instance = this;
@@ -226,6 +231,11 @@ public class PlayerInput : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * sprintSpeed, ForceMode.Force);
         } 
+
+        if (isMining && moveDirection.magnitude > 0)
+        {
+            StopMining();
+        }
     }
 
     public void OnInteractButtonDown(InputAction.CallbackContext context)
@@ -464,6 +474,30 @@ public class PlayerInput : MonoBehaviour
         {
             healthManager.TakeDamage(999);
         }
+    }
+
+    public void StartMining()
+    {
+        mineAnim.SetActive(true);
+        isMining = true;
+    }
+
+    public void StopMining()
+    {
+        isMining = false;
+        mineAnim.SetActive(false);
+    }
+
+    public void CarryCoal()
+    {
+        coalHand.SetActive(true);
+        carryingCoal = true;
+    }
+
+    public void DepositCoal()
+    {
+        coalHand.SetActive(false);
+        carryingCoal = false;
     }
 
     private void OnDrawGizmos()

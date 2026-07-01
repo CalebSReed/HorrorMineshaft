@@ -30,7 +30,7 @@ public class SoundPrefab : MonoBehaviour
 
             foreach (var listener in allListeners)
             {
-                if (listener.attachedRigidbody && listener.attachedRigidbody.GetComponent<HearingManager>() != null)
+                if (listener.attachedRigidbody && listener.attachedRigidbody.GetComponent<HearingManager>() != null && Vector3.Distance(transform.position, listener.transform.position) <= noiseRadius)
                 {
                     listener.attachedRigidbody.GetComponent<HearingManager>().HearSound(transform.position, RecalculateNoiseValue(listener.transform));
                     return;
