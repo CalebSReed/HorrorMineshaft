@@ -32,11 +32,18 @@ public class SoundPrefab : MonoBehaviour
             {
                 if (listener.attachedRigidbody && listener.attachedRigidbody.GetComponent<HearingManager>() != null)
                 {
-                    listener.attachedRigidbody.GetComponent<HearingManager>().HearSound(transform.position, noiseVal);
+                    listener.attachedRigidbody.GetComponent<HearingManager>().HearSound(transform.position, RecalculateNoiseValue(listener.transform));
                     return;
                 }
             }
         }
+    }
+
+    private float RecalculateNoiseValue(Transform listener)//reduces noise value linearly the farther the listener is.
+    {
+        float newNoiseVal = (noiseRadius - Vector3.Distance(transform.position, listener.position)) / (noiseRadius / noiseVal);
+        Debug.Log($"new val is {newNoiseVal}, dist: {Vector3.Distance(transform.position, listener.position)}");
+        return newNoiseVal;
     }
 
     public void ResumeTimer()
