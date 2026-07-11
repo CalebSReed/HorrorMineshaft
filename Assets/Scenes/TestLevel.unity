@@ -340,7 +340,7 @@ Transform:
   m_GameObject: {fileID: 34012128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2619,6 +2619,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Support Beam (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 409717251406168175, guid: 75d5271e64fc8e94899c94c5ab1fe3a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3866718935518929532, guid: 75d5271e64fc8e94899c94c5ab1fe3a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2746,6 +2751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WideWall (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2386501956761361499, guid: a1d0a7ec97938ba438b680ed916f0868,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2710596843171982992, guid: a1d0a7ec97938ba438b680ed916f0868, type: 3}
@@ -2897,7 +2907,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -4867,6 +4877,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WideWall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2386501956761361499, guid: a1d0a7ec97938ba438b680ed916f0868,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2710596843171982992, guid: a1d0a7ec97938ba438b680ed916f0868,
         type: 3}
       propertyPath: m_Height
@@ -5630,6 +5645,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 360146287134747138, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -5648,7 +5668,7 @@ PrefabInstance:
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.52
+      value: -1.527
       objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
@@ -6172,6 +6192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WideWall
       objectReference: {fileID: 0}
+    - target: {fileID: 2386501956761361499, guid: a1d0a7ec97938ba438b680ed916f0868,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2710596843171982992, guid: a1d0a7ec97938ba438b680ed916f0868, type: 3}
     m_RemovedGameObjects: []
@@ -6407,7 +6432,7 @@ GameObject:
   - component: {fileID: 1027370798}
   - component: {fileID: 1027370797}
   - component: {fileID: 1027370796}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Crate (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35367,6 +35392,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 360146287134747138, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36019,6 +36049,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 360146287134747138, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -36027,7 +36077,7 @@ PrefabInstance:
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5687351
+      value: -2.0687351
       objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
@@ -37723,6 +37773,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 360146287134747138, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37731,7 +37801,7 @@ PrefabInstance:
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5687351
+      value: -2.0687351
       objectReference: {fileID: 0}
     - target: {fileID: 6263975343302300254, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
@@ -39091,7 +39161,7 @@ MonoBehaviour:
   headBob: {fileID: 330585549}
   bodyCollider: {fileID: 466230957}
   standingBodyHeight: 2
-  crouchingBodyHeight: 1
+  crouchingBodyHeight: 0.8
   uncrouchChecker: {fileID: 34012129}
   levelLayer:
     serializedVersion: 2
@@ -40280,6 +40350,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WideWall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2386501956761361499, guid: a1d0a7ec97938ba438b680ed916f0868,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40716,7 +40791,7 @@ GameObject:
   - component: {fileID: 2142370232}
   - component: {fileID: 2142370231}
   - component: {fileID: 2142370230}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Crate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40877,6 +40952,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WideWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2386501956761361499, guid: a1d0a7ec97938ba438b680ed916f0868,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2710596843171982992, guid: a1d0a7ec97938ba438b680ed916f0868, type: 3}
@@ -41097,6 +41177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Support Beam
       objectReference: {fileID: 0}
+    - target: {fileID: 409717251406168175, guid: 75d5271e64fc8e94899c94c5ab1fe3a0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 819815700450006351, guid: 75d5271e64fc8e94899c94c5ab1fe3a0,
         type: 3}
       propertyPath: m_Enabled
@@ -41288,6 +41373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crate
+      objectReference: {fileID: 0}
+    - target: {fileID: 360146287134747138, guid: 8eeb635522b20c341abc39e43caaa652,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2456651950242009355, guid: 8eeb635522b20c341abc39e43caaa652,
         type: 3}
