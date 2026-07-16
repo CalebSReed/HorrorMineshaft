@@ -172,6 +172,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ProgressCutscene"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c49db12-e0a2-43bc-95d3-8ef82016dce1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f859cf2a-74f0-4e97-924e-0aaa39d4597b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""ProgressCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -351,6 +371,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerDefault_ToggleLight = m_PlayerDefault.FindAction("ToggleLight", throwIfNotFound: true);
         m_PlayerDefault_Crouch = m_PlayerDefault.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerDefault_Sprint = m_PlayerDefault.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerDefault_ProgressCutscene = m_PlayerDefault.FindAction("ProgressCutscene", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -440,6 +461,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerDefault_ToggleLight;
     private readonly InputAction m_PlayerDefault_Crouch;
     private readonly InputAction m_PlayerDefault_Sprint;
+    private readonly InputAction m_PlayerDefault_ProgressCutscene;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerDefault".
     /// </summary>
@@ -487,6 +509,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerDefault/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_PlayerDefault_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerDefault/ProgressCutscene".
+        /// </summary>
+        public InputAction @ProgressCutscene => m_Wrapper.m_PlayerDefault_ProgressCutscene;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -540,6 +566,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @ProgressCutscene.started += instance.OnProgressCutscene;
+            @ProgressCutscene.performed += instance.OnProgressCutscene;
+            @ProgressCutscene.canceled += instance.OnProgressCutscene;
         }
 
         /// <summary>
@@ -578,6 +607,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @ProgressCutscene.started -= instance.OnProgressCutscene;
+            @ProgressCutscene.performed -= instance.OnProgressCutscene;
+            @ProgressCutscene.canceled -= instance.OnProgressCutscene;
         }
 
         /// <summary>
@@ -694,5 +726,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ProgressCutscene" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnProgressCutscene(InputAction.CallbackContext context);
     }
 }

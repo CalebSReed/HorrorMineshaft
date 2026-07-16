@@ -151,6 +151,12 @@ public class MonsterBehavior : MonoBehaviour
                 }
             }
             //Debug.Log("unseen");
+
+            if (playerIsSeen)
+            {
+
+            }
+
             playerIsSeen = false;    
         }
     }

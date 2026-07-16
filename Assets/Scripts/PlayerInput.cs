@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.UI;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -94,9 +95,13 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private GameObject mineAnim;
     [SerializeField] private GameObject coalHand;
 
+    public bool inCubbyHole;
+
     private void Awake()
     {
         Instance = this;
+
+        Application.targetFrameRate = -1;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -144,7 +149,7 @@ public class PlayerInput : MonoBehaviour
         CheckToRemoveStaminaPenalty();
         MaintainCameraHeight();
 
-        if (tryingToUncrouch)
+        if (tryingToUncrouch)//fix so that holding down crouch again will stop checking, i uncrouched when exiting a hole and DIED bcuz of this!!!
         {
             TryToUncrouch();
         }
@@ -172,6 +177,7 @@ public class PlayerInput : MonoBehaviour
             movementState = MovementState.CrouchingDrained;
             bodyCollider.height = crouchingBodyHeight;
             bodyCollider.transform.localPosition = crouchingVectorPos;
+            tryingToUncrouch = false;
         }
         else if (previousMovementState == MovementState.CrouchingDrained && movementState == MovementState.Walking)
         {
@@ -192,6 +198,7 @@ public class PlayerInput : MonoBehaviour
             headBob.speedMult = .5f;
             bodyCollider.height = crouchingBodyHeight;
             bodyCollider.transform.localPosition = crouchingVectorPos;
+            tryingToUncrouch = false;
         }
         else if (movementState == MovementState.Drained)
         {
@@ -473,6 +480,18 @@ public class PlayerInput : MonoBehaviour
         if (other.CompareTag("Monster"))
         {
             healthManager.TakeDamage(999);
+        }
+        else if (other.CompareTag("CubbyHole"))
+        {
+            inCubbyHole = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CubbyHole"))
+        {
+            inCubbyHole = false;
         }
     }
 

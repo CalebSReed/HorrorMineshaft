@@ -59,8 +59,8 @@ public class CameraInput : MonoBehaviour
         {
             return;
         }
-        mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        mouseX = Input.GetAxis("Mouse X") * sensX;
+        mouseY = Input.GetAxis("Mouse Y") * sensY;
 
         xRotation -= mouseY;
         yRotation += mouseX;

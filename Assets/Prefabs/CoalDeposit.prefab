@@ -138,7 +138,7 @@ MonoBehaviour:
   phase2: {fileID: -5495902117074765545, guid: 7407de316417dfe4ca2aba714365e167, type: 3}
   phase3: {fileID: -5495902117074765545, guid: 37401f0674c21a14dbcd43cb303a5b70, type: 3}
   maxMineTime: 15
-  monsterSearchSpot: {fileID: 0}
+  monsterSearchSpot: {fileID: 3515196344264295775}
 --- !u!1 &4875912643202164082
 GameObject:
   m_ObjectHideFlags: 0
