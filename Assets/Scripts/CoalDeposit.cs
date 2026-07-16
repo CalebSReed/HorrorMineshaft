@@ -13,6 +13,7 @@ public class CoalDeposit : MonoBehaviour
 
     [SerializeField] private float maxMineTime;
     private float currentMineTime;
+    [SerializeField] private Transform monsterSearchSpot;
 
     private void Start()
     {
@@ -55,6 +56,14 @@ public class CoalDeposit : MonoBehaviour
         {
             PlayerInput.Instance.StartMining();
             beingMined = true;
+            var rand = Random.Range(0, 4);
+
+            if (rand == 0)
+            {
+                var pos = monsterSearchSpot.position;
+                pos.y = 0;
+                MonsterBehavior.Instance.SetAgentDestination(pos);
+            }
         }
     }
 }

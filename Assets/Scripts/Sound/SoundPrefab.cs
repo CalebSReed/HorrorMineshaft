@@ -28,6 +28,10 @@ public class SoundPrefab : MonoBehaviour
 
             var allListeners = Physics.OverlapSphere(transform.position, noiseRadius);
 
+            if (noiseVal == 0)//dont bother if u dont make noise for monster
+            {
+                return;
+            }
             foreach (var listener in allListeners)
             {
                 if (listener.attachedRigidbody && listener.attachedRigidbody.GetComponent<HearingManager>() != null && Vector3.Distance(transform.position, listener.transform.position) <= noiseRadius)

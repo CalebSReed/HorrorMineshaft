@@ -7,6 +7,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class MonsterBehavior : MonoBehaviour
 {
+    public static MonsterBehavior Instance { get; private set; }
+
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float aiTickUpdateLength;
     private WaitForSeconds aiUpdateTimer;
@@ -16,11 +18,18 @@ public class MonsterBehavior : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float minWanderWait;
     [SerializeField] private float maxWanderWait;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float chaseSpeed;
     private bool waitingToWander;
     private float waitingTimer;
     private float waitingGoal;
     private bool reachedDestination = true;
     [SerializeField] private float wanderRange;
+    private bool isChasing;
+    [SerializeField] private Animator anim;
+
+    [SerializeField] private float walkingAcceleration;
+    [SerializeField] private float chasingAcceleration;
 
     public enum MonsterState
     {
@@ -31,19 +40,34 @@ public class MonsterBehavior : MonoBehaviour
         Waiting
     }
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
+        agent.acceleration = walkingAcceleration;
         agent.SetDestination(transform.position);
         aiUpdateTimer = new WaitForSeconds(aiTickUpdateLength);
         StartCoroutine(TryToChase());
         StartCoroutine(CheckForPlayer());
         StartCoroutine(CheckIfDestinationReached());
+        StartCoroutine(WaitToTalk());
     }
 
     private void Update()
     {
         Wander();
+    }
+
+    private IEnumerator WaitToTalk()
+    {
+        var rand = Random.Range(4f, 10f);
+        yield return new WaitForSeconds(rand);
+        var audioRand = Random.Range(1, 4);
+        AudioManager.Instance.Play($"MonsterTalk{audioRand}", transform.position, gameObject, false, true, false);
+        StartCoroutine(WaitToTalk());
     }
 
     private IEnumerator CheckIfDestinationReached()
@@ -53,6 +77,15 @@ public class MonsterBehavior : MonoBehaviour
             if (Vector3.Distance(transform.position, agent.destination) <= 1f)
             {
                 reachedDestination = true;
+                anim.SetBool("isMoving", false);
+
+                if (!playerIsSeen)
+                {
+                    isChasing = false;
+                    agent.acceleration = walkingAcceleration;
+                    SetMoveSpeed(walkSpeed);
+                    anim.SetBool("isChasing", false);
+                }
             }
             else
             {
@@ -77,6 +110,7 @@ public class MonsterBehavior : MonoBehaviour
                     waitingTimer = 0;
                     reachedDestination = false;
                     SetNewWanderDestination();
+                    anim.SetBool("isMoving", true);
                 }
             }
             else
@@ -107,6 +141,10 @@ public class MonsterBehavior : MonoBehaviour
                     if (rayHit.collider && rayHit.collider.attachedRigidbody && rayHit.collider.attachedRigidbody.gameObject.CompareTag("Player"))
                     {
                         playerIsSeen = true;
+                        isChasing = true;
+                        agent.acceleration = chasingAcceleration;
+                        anim.SetBool("isChasing", true);
+                        SetMoveSpeed(chaseSpeed);
                         //Debug.Log("seen");
                         continue;
                     } 
@@ -117,7 +155,7 @@ public class MonsterBehavior : MonoBehaviour
         }
     }
 
-    private IEnumerator TryToChase()
+    private IEnumerator TryToChase()//Acceleration controls how easily monster turns, when wandering it shouldnt turn so quickly but when close to the player chasing it down, it should snap towards player, so dynamically change acceleration pls!
     {
         while (true)
         {
@@ -153,7 +191,16 @@ public class MonsterBehavior : MonoBehaviour
         {
             reachedDestination = false;
             agent.destination = pos;
+            isChasing = true;
+            agent.acceleration = chasingAcceleration;
+            anim.SetBool("isChasing", true);
+            SetMoveSpeed(chaseSpeed);
             //Debug.Log("goingg now");
         }
+    }
+
+    private void SetMoveSpeed(float val)
+    {
+        agent.speed = val;
     }
 }

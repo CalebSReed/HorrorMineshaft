@@ -71,10 +71,10 @@ public class CarbonMonoxide : MonoBehaviour
             currentNode = null;
         }
 
-        while (currentNode == null)
+        while (currentNode == null)//currentNode will be null if it selects a node that is already occupied by another monoxide instance
         {
-            int coinFlip = Random.Range(0, 2);
-            if (coinFlip == 0)//choose random
+            int coinFlip = Random.Range(0, 4);
+            if (coinFlip != 0)//choose random
             {
                 Debug.Log("choosing random node");
                 var rand = Random.Range(0, nearbyNodes.Length - 1);
