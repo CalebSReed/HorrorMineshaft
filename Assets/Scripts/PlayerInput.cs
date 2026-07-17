@@ -288,6 +288,7 @@ public class PlayerInput : MonoBehaviour
         if (context.performed && movementState != MovementState.Sprinting)
         {
             ChangeMovementState(MovementState.Crouching);
+            tryingToUncrouch = false;
         }
         else if (context.canceled && movementState == MovementState.Crouching || context.canceled && movementState == MovementState.CrouchingDrained)
         {
