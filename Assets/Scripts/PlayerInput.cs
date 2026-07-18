@@ -149,7 +149,7 @@ public class PlayerInput : MonoBehaviour
         CheckToRemoveStaminaPenalty();
         MaintainCameraHeight();
 
-        if (tryingToUncrouch)//fix so that holding down crouch again will stop checking, i uncrouched when exiting a hole and DIED bcuz of this!!!
+        if (tryingToUncrouch)
         {
             TryToUncrouch();
         }
@@ -305,7 +305,7 @@ public class PlayerInput : MonoBehaviour
 
         if (hits.Length > 0)
         {
-            Debug.Log(hits[0]);
+            //Debug.Log(hits[0]);
             tryingToUncrouch = true;
             return false;
         }

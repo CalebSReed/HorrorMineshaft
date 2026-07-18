@@ -31,6 +31,8 @@ public class MonsterBehavior : MonoBehaviour
     [SerializeField] private float walkingAcceleration;
     [SerializeField] private float chasingAcceleration;
 
+    private bool playerSpottedInCubbyHole;
+
     public enum MonsterState
     {
         Default,
@@ -134,7 +136,7 @@ public class MonsterBehavior : MonoBehaviour
                 if (playerToMonsterAngle < maxAngleRange)
                 {
                     RaycastHit rayHit;
-                    var checkPos = new Vector3(transform.position.x, PlayerInput.Instance.transform.position.y + 1f, transform.position.z);
+                    var checkPos = new Vector3(transform.position.x, PlayerInput.Instance.transform.position.y + .25f, transform.position.z);
                     Physics.Raycast(checkPos, monsterToPlayerDir, out rayHit, maxSightRange);
                     //if (rayHit.collider && rayHit.collider.attachedRigidbody) Debug.Log(rayHit.collider.attachedRigidbody.gameObject.name);
 
@@ -150,11 +152,18 @@ public class MonsterBehavior : MonoBehaviour
                     } 
                 }
             }
-            //Debug.Log("unseen");
 
-            if (playerIsSeen)
+            Debug.Log($"unseen + {playerIsSeen}");
+
+            if (playerIsSeen && PlayerInput.Instance.inCubbyHole)
             {
-
+                playerSpottedInCubbyHole = true;
+                print("in cubby");
+            }
+            else if (playerIsSeen && !PlayerInput.Instance.inCubbyHole)
+            {
+                playerSpottedInCubbyHole = false;
+                print("out cubby");
             }
 
             playerIsSeen = false;    
@@ -208,5 +217,13 @@ public class MonsterBehavior : MonoBehaviour
     private void SetMoveSpeed(float val)
     {
         agent.speed = val;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CubbyHole") && playerSpottedInCubbyHole)
+        {
+            PlayerInput.Instance.GetComponent<HealthManager>().TakeDamage(999);
+        }
     }
 }

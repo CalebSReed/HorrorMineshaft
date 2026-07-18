@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Minecart : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class Minecart : MonoBehaviour
             
             if (coalCounter <= 0)
             {
+                SceneManager.LoadScene(2);
+                return;
                 signBehavior.SetSignText("YOU MUST LEAVE");
                 var pos = transform.position;
                 pos.y = 0;
