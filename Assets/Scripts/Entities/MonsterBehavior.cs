@@ -33,6 +33,13 @@ public class MonsterBehavior : MonoBehaviour
 
     private bool playerSpottedInCubbyHole;
 
+    [SerializeField] private CapsuleCollider meshCollider;
+
+    [SerializeField] private int defaultNavAgentType;
+    [SerializeField] private int crawlNavAgentType;
+
+    private Coroutine screamRoutine;
+
     public enum MonsterState
     {
         Default,
@@ -68,8 +75,20 @@ public class MonsterBehavior : MonoBehaviour
         var rand = Random.Range(4f, 10f);
         yield return new WaitForSeconds(rand);
         var audioRand = Random.Range(1, 4);
-        AudioManager.Instance.Play($"MonsterTalk{audioRand}", transform.position, gameObject, false, true, false);
+        if (screamRoutine == null)
+        {
+            AudioManager.Instance.Play($"MonsterTalk{audioRand}", transform.position, gameObject, false, true, false);
+        }
         StartCoroutine(WaitToTalk());
+    }
+
+    private IEnumerator WaitToScream()
+    {
+        var rand = Random.Range(4f, 6f);
+        yield return new WaitForSeconds(rand);
+        var audioRand = Random.Range(1, 4);
+        AudioManager.Instance.Play($"MonsterAlert{audioRand}", transform.position, gameObject, false, true, true);
+        screamRoutine = StartCoroutine(WaitToScream());
     }
 
     private IEnumerator CheckIfDestinationReached()
@@ -142,6 +161,13 @@ public class MonsterBehavior : MonoBehaviour
 
                     if (rayHit.collider && rayHit.collider.attachedRigidbody && rayHit.collider.attachedRigidbody.gameObject.CompareTag("Player"))
                     {
+                        if (!playerIsSeen)
+                        {
+                            var rand = Random.Range(1, 4);
+                            AudioManager.Instance.Play($"MonsterAlert{rand}", transform.position, gameObject, false, true, true);
+                            screamRoutine = StartCoroutine(WaitToScream());
+                        }
+
                         playerIsSeen = true;
                         isChasing = true;
                         agent.acceleration = chasingAcceleration;
@@ -158,15 +184,33 @@ public class MonsterBehavior : MonoBehaviour
             if (playerIsSeen && PlayerInput.Instance.inCubbyHole)
             {
                 playerSpottedInCubbyHole = true;
-                print("in cubby");
+                anim.SetBool("isCrawling", true);
+                SetMoveSpeed(chaseSpeed*3);
+                meshCollider.center = new Vector3(0, -.8f, 0);
+                meshCollider.height = .4f;
+                meshCollider.radius = .2f;
+                //print(agent.agentTypeID);
+                agent.agentTypeID = crawlNavAgentType;
+                //print("in cubby");
+                continue;
             }
             else if (playerIsSeen && !PlayerInput.Instance.inCubbyHole)
             {
                 playerSpottedInCubbyHole = false;
-                print("out cubby");
+                anim.SetBool("isCrawling", false);
+                meshCollider.center = new Vector3(0, 2, 0);
+                meshCollider.height = 2f;
+                meshCollider.radius = .25f;
+                agent.agentTypeID = 0;
+                //print("out cubby");
             }
 
             playerIsSeen = false;    
+            if (screamRoutine != null)
+            {
+                StopCoroutine(screamRoutine);
+                screamRoutine = null;
+            }
         }
     }
 
@@ -219,11 +263,11 @@ public class MonsterBehavior : MonoBehaviour
         agent.speed = val;
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CubbyHole") && playerSpottedInCubbyHole)
         {
             PlayerInput.Instance.GetComponent<HealthManager>().TakeDamage(999);
         }
-    }
+    }*/
 }

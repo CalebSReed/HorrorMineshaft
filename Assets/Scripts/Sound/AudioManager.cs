@@ -181,6 +181,14 @@ public class AudioManager : MonoBehaviour//we need multiple instances of this. s
         //s.source.Stop();
     }
 
+    public void StopAllSounds()
+    {
+        for (int i = 0; i < poolParent.childCount; i++)
+        {
+            DestroySound(poolParent.GetChild(i).gameObject);
+        }
+    }
+
     public void ChangeMusicVolume(object sender, EventArgs e)
     {
         for (int i = 0; i < poolParent.childCount; i++)

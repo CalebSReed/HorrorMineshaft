@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -96,6 +97,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private GameObject coalHand;
 
     public bool inCubbyHole;
+    [SerializeField] private GameObject gameoverScreen;
 
     private void Awake()
     {
@@ -473,7 +475,17 @@ public class PlayerInput : MonoBehaviour
         healthManager.SetIsAlive(false);
         playerInput.Disable();
         CameraInput.DisableControls();
+        AudioManager.Instance.StopAllSounds();
+        AudioManager.Instance.Play("Kill", transform.position, null, true, false, true);
+        gameoverScreen.SetActive(true);
+        StartCoroutine(ResetGame());
         Debug.Log("GAME OVER");
+    }
+
+    private IEnumerator ResetGame()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(1);
     }
 
     private void OnTriggerEnter(Collider other)

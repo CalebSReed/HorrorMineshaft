@@ -1941,6 +1941,69 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 217882678}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &228041706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 228041708}
+  - component: {fileID: 228041707}
+  m_Layer: 0
+  m_Name: MonsterCrawlNavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &228041707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228041706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 2049
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 1
+  m_TileSize: 1024
+  m_OverrideVoxelSize: 1
+  m_VoxelSize: 0.1
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: c7ed8e32281c35f40bec340955422363, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &228041708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228041706}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 88.71895, y: -167.4246, z: 224.80884}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &237395853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5507,8 +5570,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6449,6 +6512,81 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 853116087}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &859216420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859216421}
+  - component: {fileID: 859216423}
+  - component: {fileID: 859216422}
+  m_Layer: 5
+  m_Name: GameOver Screen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &859216421
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859216420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2138234102}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -30, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &859216422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859216420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5010f101735b94448b9f6af86568640a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &859216423
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859216420}
+  m_CullTransparentMesh: 1
 --- !u!1001 &863121204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7803,6 +7941,34 @@ MonoBehaviour:
     soundReachRadius: 0
     alertValue: 0
     loop: 1
+  - name: MonsterAlert1
+    clip: {fileID: 8300000, guid: 348903a45869116479d72514cefc13bd, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 0
+    alertValue: 0
+    loop: 0
+  - name: MonsterAlert2
+    clip: {fileID: 8300000, guid: 38f9c5d41a2f22c4d861a6bfd3dbfefe, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 0
+    alertValue: 0
+    loop: 0
+  - name: MonsterAlert3
+    clip: {fileID: 8300000, guid: 81e3828cca4a485419d6a46dbb213a5b, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 0
+    alertValue: 0
+    loop: 0
+  - name: Kill
+    clip: {fileID: 8300000, guid: c009fa1065e5a41469fe2c504882c8ce, type: 3}
+    soundType: 0
+    volumeMult: 1
+    soundReachRadius: 0
+    alertValue: 0
+    loop: 0
 --- !u!4 &1102388210
 Transform:
   m_ObjectHideFlags: 0
@@ -40030,7 +40196,7 @@ CapsuleCollider:
   m_Radius: 0.25
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1797505232
 GameObject:
   m_ObjectHideFlags: 0
@@ -41237,6 +41403,7 @@ MonoBehaviour:
   mineAnim: {fileID: 70008315}
   coalHand: {fileID: 1955658062}
   inCubbyHole: 0
+  gameoverScreen: {fileID: 859216420}
 --- !u!54 &1917527894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41273,7 +41440,7 @@ Transform:
   m_GameObject: {fileID: 1917527892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -59.5, y: 0, z: 106.2}
+  m_LocalPosition: {x: -59.5, y: 0, z: 91.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41479,7 +41646,7 @@ GameObject:
   - component: {fileID: 1934593486}
   - component: {fileID: 1934593485}
   m_Layer: 11
-  m_Name: NavMesh Surface
+  m_Name: MonsterDefaultNavMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42445,6 +42612,9 @@ MonoBehaviour:
   anim: {fileID: 2079895180}
   walkingAcceleration: 5
   chasingAcceleration: 50
+  meshCollider: {fileID: 1794615657}
+  defaultNavAgentType: 0
+  crawlNavAgentType: -1372625422
 --- !u!4 &2079895175
 Transform:
   m_ObjectHideFlags: 0
@@ -42453,8 +42623,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079895170}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -59.58, y: 0, z: 88.56}
+  m_LocalRotation: {x: -0, y: -0.6092043, z: -0, w: 0.79301333}
+  m_LocalPosition: {x: -59.58, y: 0, z: 58.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42462,7 +42632,7 @@ Transform:
   - {fileID: 349138322}
   - {fileID: 1794615654}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -75.064, z: 0}
 --- !u!195 &2079895176
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -42471,7 +42641,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079895170}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 10
   m_Acceleration: 5
@@ -43398,10 +43568,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -43446,6 +43616,7 @@ RectTransform:
   m_Children:
   - {fileID: 691769076}
   - {fileID: 195804056}
+  - {fileID: 859216421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -44260,6 +44431,7 @@ SceneRoots:
   - {fileID: 1405169878}
   - {fileID: 2079895175}
   - {fileID: 984721218}
+  - {fileID: 228041708}
   - {fileID: 1934593486}
   - {fileID: 204538517}
   - {fileID: 593681110}
